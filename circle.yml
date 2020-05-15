@@ -3,6 +3,7 @@ machine:
     TERRAFORM_DOCKER_IMAGE_NAME: hashicorp/terraform:0.9.1
   services:
     - docker
+  context: gd-ireland
 database:
   override:
     - echo "Skip database phase"
