@@ -72,10 +72,11 @@ dependencies:
         -backend-config="region=${AWS_DEFAULT_REGION}"
 jobs:
   deployment:
-    - master:
-        branch: master
-        commands:
-          - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} apply
+    docker:
+      - image: tootsuite/mastodon
+    steps:
+      - run:
+        command: docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} apply
   test:
     - override:
         - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} plan
