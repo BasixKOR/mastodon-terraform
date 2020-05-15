@@ -92,9 +92,9 @@ jobs:
       - image: tootsuite/mastodon
     steps:
       - run: docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} apply
-  test:
-    - override:
-        - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} plan
+#  test:
+#    - override:
+#        - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} plan
 workflows:
   # Name the workflow "welcome"
   deployment:
