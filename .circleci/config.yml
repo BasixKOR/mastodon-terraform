@@ -86,7 +86,7 @@ dependencies:
         -backend-config="bucket=${AWS_S3_BUCKET_TERRAFORM_STATE_NAME}" \
         -backend-config="key=${AWS_S3_BUCKET_TERRAFORM_STATE_KEY}" \
         -backend-config="region=${AWS_DEFAULT_REGION}"
-deploy:
+deployment:
   master:
     branch: master
     commands:
@@ -113,4 +113,4 @@ workflows:
   deployment:
     # Run the welcome/run job in its own container
     jobs:
-      - deploy
+      - master
