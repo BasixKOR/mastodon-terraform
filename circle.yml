@@ -70,11 +70,12 @@ dependencies:
         -backend-config="bucket=${AWS_S3_BUCKET_TERRAFORM_STATE_NAME}" \
         -backend-config="key=${AWS_S3_BUCKET_TERRAFORM_STATE_KEY}" \
         -backend-config="region=${AWS_DEFAULT_REGION}"
-deployment:
-  master:
-    branch: master
-    commands:
-      - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} apply
-test:
-  override:
-    - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} plan
+jobs:
+  deployment:
+    master:
+      branch: master
+      commands:
+        - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} apply
+  test:
+    override:
+      - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} plan
