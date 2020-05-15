@@ -72,10 +72,10 @@ dependencies:
         -backend-config="region=${AWS_DEFAULT_REGION}"
 jobs:
   deployment:
-    master:
-      branch: master
-      commands:
-        - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} apply
+    - master:
+        branch: master
+        commands:
+          - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} apply
   test:
-    override:
-      - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} plan
+    - override:
+        - docker run --env-file .env --volume $(pwd)/terraform:/app/terraform --workdir /app/terraform ${TERRAFORM_DOCKER_IMAGE_NAME} plan
